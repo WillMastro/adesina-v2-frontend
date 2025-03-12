@@ -1,0 +1,174 @@
+/* General Container Styling */
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  /* Login Box */
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Title and Description */
+  .login-title {
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a202c;
+  }
+  
+  .login-description {
+    font-family: Montserrat ;
+    font-size: 20px;
+    color: #4a5568;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    font-family: Montserrat;
+    display: block;
+    font-size: 16px;
+    color: #4a5568;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    border-color: #34d399;
+    outline: none;
+  }
+  
+  /* Password Field */
+  .password-container {
+    position: relative;
+  }
+  
+  .password-container input {
+    width: 100%;
+    padding-right: 35px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Login Button */
+  .login-button {
+    width: 100%;
+    font-family: Montserrat;
+    background: #34d399;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background: #059669;
+  }
+  
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    position: relative;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+  }
+  
+  .divider span {
+    margin: 0 10px;
+    color: #718096;
+    font-size: 14px;
+  }
+  
+  /* Social Login Buttons */
+  .social-login {
+    width: 100%;
+    font-family: Montserrat;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+  
+  .social-login:hover {
+    background: #f8fafc;
+  }
+  
+  .google {
+    color: #000;
+  }
+  
+  
+  /* Signup Text */
+  .signup-text {
+    font-family: Montserrat;
+    font-size: 14px;
+    color: #4a5568;
+    margin-top: 15px;
+  }
+  
+  .signup-link {
+    font-family: Montserrat;
+    color: #34d399;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -4,78 +4,121 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { isSending, notifyError } from "../../utils/useutils";
 import { makeRequest } from "../../hook/useApi";
 import { loginApi } from "../../data/apis";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Login.css"; // Import CSS file
 
 const Login = () => {
-    const Navigate = useNavigate();
-  const [user, setUser] = useState({
-    email:"",
-  })
+  const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e:any) => {
-    const {name, value} = e.target;
-    setUser({...user, [name]:value})
-  }
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    Manuallogin();
+  };
 
-  const loginHndler = async(data:any)=> {
-    const cb = () => {isSending(false)};
+  const loginHndler = async (data: any) => {
+    const cb = () => isSending(false);
     isSending(true, "Please Wait...");
-     const res = await makeRequest("POST", loginApi, data, cb);
-     if(res){
-        localStorage.setItem('adesina_token', res.data);
-        window.location.reload();
-     } 
-  }
-  
-  const login: () => void = useGoogleLogin({
-    onSuccess: (tokenResponse) => handleSuccess(tokenResponse) ,
-    onError: () => notifyError('login Failed')
+    const res = await makeRequest("POST", loginApi, data, cb);
+    if (res) {
+      localStorage.setItem("adesina_token", res.data);
+      window.location.reload();
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => handleSuccess(tokenResponse),
+    onError: () => notifyError("Login Failed"),
   });
 
   const handleSuccess = async (response: any) => {
-    const res = await makeRequest('GET', 'https://www.googleapis.com/oauth2/v3/userinfo', null, null, response?.access_token);
-    if(res){
-      const data = {email:res.email}
-       await loginHndler(data);
-   }
+    const res = await makeRequest(
+      "GET",
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      null,
+      null,
+      response?.access_token
+    );
+    if (res) {
+      const data = { email: res.email };
+      await loginHndler(data);
+    }
   };
 
- const Manuallogin = async() => {
-     if(user?.email == ""){
-         notifyError("Email is required");
-         return
-     }
-     await loginHndler(user);
- }
+  const Manuallogin = async () => {
+    if (email === "") {
+      notifyError("Email is required");
+      return;
+    }
+    await loginHndler({ email });
+  };
 
-  
+  return (
+    <section className="centered-algn">
+    <NavBar active="signUp" />
 
-    return ( <>
-     <section  className="centered-algn">
-        <NavBar active="login" />
-        <div className="my-col-4 rad-20  my-bottom-50 bd-code-2 down-10 off-4 xs-down-30vh xs-container">
-            <div className="my-container xs-10 xs-off-1 xs-down-10 down-5">
-              <div><span className="px13 besley-bold alice xs-px15 ">Login</span>
-              <div className="my-mother xs-down-1"><span className="px10 faded-sol besley-regular xs-px13">Unlimited contents for you</span></div>
-               <div className="my-mother down-2 xs-down-5">
-                {/* <span className="faded-sol gap-elements centered-align fnt-system bold px9 xs-px13"><i className="fas xs-px13  fa-envelope px9"></i>Email</span> */}
-                <input type="text" name="email" value={user?.email} onChange={handleChange}  placeholder="Enter your email" className="input down-1 rad-10 xs-down-2 px10 xs-px12 alice besley-regular bd-code-2" />
-               </div>
-                <div className="my-mother down-2 xs-down-5">
-                  <button className="input flex px9 besley-bold bg-faded-2 centered xs-px13 rad-10" onClick={Manuallogin}> Login</button>
-                </div>
-                <div className="my-mother down-3 xs-down-10">
-                  <span className="alice bold c-pointer pd-10" onClick={()=> {login()}}>Continue With Google <i className="fab fa-google"></i></span>
-                </div>
-                <div className="my-mother down-3 xs-down-10">
-                  <span className="alice c-pointer pd-10" onClick={()=> {Navigate('/signup')}}>I haven't signed up </span>
-                </div>
-              </div>
-            </div>
-        </div> 
-     </section>
-    
-    </> );
-}
- 
+    <div className="login-container">
+      <div className="login-box">
+        <h2 className="login-title">Login</h2>
+        <p className="login-description">
+        Unlimited contents for you
+        </p>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="input-group">
+            <label>Email address</label>
+            <input
+              type="email"
+              placeholder="abc@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <div className="password-container">
+  <input
+    type={showPassword ? "text" : "password"}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Enter your password"
+    required
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="toggle-password"
+  >
+    {showPassword ? "🙈" : "👁️"}
+  </button>
+</div>
+
+          </div>
+          <button type="submit" className="login-button">
+            Login to your account
+          </button>
+        </form>
+        <div className="divider">
+          <span>or</span>
+        </div>
+        <button onClick={() => login()} className="social-login google">
+        <img
+                src="https://img.icons8.com/color/20/000000/google-logo.png"
+                alt="Google"
+                className="mr-2"
+              />
+              <span>Continue with Google</span>
+        </button>
+        
+        <p className="signup-text">
+          Don't have an account? <Link to="/signup" className="signup-link">Sign up</Link>
+        </p>
+      </div>
+    </div>
+    </section>
+  );
+};
+
 export default Login;
+
