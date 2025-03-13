@@ -4,10 +4,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { isSending, notifyError } from "../../utils/useutils";
 import { makeRequest } from "../../hook/useApi";
 import { signupApi } from "../../data/apis";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./signup.css";
 
 const SignUp = () => {
+  const Navigate = useNavigate();
   const [user, setUser] = useState({
     fullname:"",
     email:"",
@@ -122,9 +123,9 @@ const SignUp = () => {
         {/* Already have an account */}
         <p className="login-text">
           Already have an account?{" "}
-          <Link to="/login" className="login-link">
+          <span  onClick={()=> {Navigate('/login')}} className="login-link">
             Login
-            </Link>
+            </span>
         </p>
       </div>
     </div>

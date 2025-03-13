@@ -31,8 +31,8 @@ const App = () => {
            <Route path="/watch" element={ token? <Watch/> : <Navigate to="/login" />} />
            <Route path="/Cities" element={<Cities/>} />
            <Route path="/contact" element={<ContactUs/>} />
-           <Route path="/signup" element={!token? <SignUp/> : <Navigate to="/watch" />} />
-           <Route path="/login" element={!token?<Login/> : <Navigate to="/watch" />} />
+           <Route path="/signup" element={ <SignUp/> } />
+           <Route path="/login" element={<Login/> }/>
            <Route path="*" element={<NotFound/>} />
         </Route>
       </>

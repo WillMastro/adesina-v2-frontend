@@ -11,10 +11,10 @@
   .login-box {
     width: 100%;
     max-width: 400px;
-    background: white;
+    background: black;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px white;
     text-align: center;
   }
   
@@ -23,13 +23,13 @@
     font-family: DM Sans;
     font-size: 24px;
     font-weight: bold;
-    color: #1a202c;
+    color: white;
   }
   
   .login-description {
     font-family: Montserrat ;
     font-size: 20px;
-    color: #4a5568;
+    color: white;
     margin-bottom: 20px;
   }
   
@@ -48,7 +48,7 @@
     font-family: Montserrat;
     display: block;
     font-size: 16px;
-    color: #4a5568;
+    color: white;
     margin-bottom: 5px;
   }
   
@@ -62,7 +62,7 @@
   }
   
   .input-group input:focus {
-    border-color: #34d399;
+    border-color: #fce8a9;
     outline: none;
   }
   
@@ -91,7 +91,7 @@
   .login-button {
     width: 100%;
     font-family: Montserrat;
-    background: #34d399;
+    background: #0000;
     color: white;
     padding: 10px;
     border: none;
@@ -102,7 +102,7 @@
   }
   
   .login-button:hover {
-    background: #059669;
+    background: gray;
   }
   
   /* Divider */
@@ -133,7 +133,7 @@
     width: 100%;
     font-family: Montserrat;
     padding: 10px;
-    border: 1px solid #cbd5e0;
+    border: 1px solid #0000;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
@@ -145,11 +145,11 @@
   }
   
   .social-login:hover {
-    background: #f8fafc;
+    background: gray;
   }
   
   .google {
-    color: #000;
+    color: #ffff;
   }
   
   
@@ -157,13 +157,13 @@
   .signup-text {
     font-family: Montserrat;
     font-size: 14px;
-    color: #4a5568;
+    color: #ffff;
     margin-top: 15px;
   }
   
   .signup-link {
     font-family: Montserrat;
-    color: #34d399;
+    color: #ffff;
     text-decoration: none;
     font-weight: bold;
   }

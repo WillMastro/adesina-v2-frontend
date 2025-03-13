@@ -4,10 +4,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { isSending, notifyError } from "../../utils/useutils";
 import { makeRequest } from "../../hook/useApi";
 import { loginApi } from "../../data/apis";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Import CSS file
 
 const Login = () => {
+  const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -117,7 +118,7 @@ const Login = () => {
         </button>
         
         <p className="signup-text">
-          Don't have an account? <Link to="/signup" className="signup-link">Sign up</Link>
+          Don't have an account? <span onClick={()=> {Navigate('/signup')}} className="signup-link">Sign up</span>
         </p>
       </div>
     </div>
