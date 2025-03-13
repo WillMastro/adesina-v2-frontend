@@ -12,12 +12,16 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     Manuallogin();
   };
 
-  const loginHndler = async (data: any) => {
+  interface LoginData {
+    email: string;
+  }
+
+  const loginHndler = async (data: LoginData) => {
     const cb = () => isSending(false);
     isSending(true, "Please Wait...");
     const res = await makeRequest("POST", loginApi, data, cb);
@@ -32,7 +36,7 @@ const Login = () => {
     onError: () => notifyError("Login Failed"),
   });
 
-  const handleSuccess = async (response: any) => {
+  const handleSuccess = async (response: { access_token: string }) => {
     const res = await makeRequest(
       "GET",
       "https://www.googleapis.com/oauth2/v3/userinfo",
@@ -92,6 +96,7 @@ const Login = () => {
   >
     {showPassword ? "🙈" : "👁️"}
   </button>
+  
 </div>
 
           </div>

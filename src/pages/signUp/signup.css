@@ -1,0 +1,144 @@
+/* Signup Page Styling */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+   
+  }
+  
+  .signup-box {
+    width: 350px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 80px; /* Adjust this value to increase space */
+  }
+  
+  
+  .signup-title {
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+  }
+  
+  .signup-subtext {
+    font-family: Montserrat;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Fields */
+  .input-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-group input:focus {
+    border-color: #22c55e;
+    box-shadow: 0px 0px 5px rgba(34, 197, 94, 0.5);
+  }
+  
+  /* Terms and Conditions */
+  .terms {
+    font-family: Montserrat;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .terms .link {
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .terms .link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Buttons */
+  .signup-btn {
+    font-family: Montserrat;
+    width: 100%;
+    background-color: #22c55e;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .signup-btn:hover {
+    background-color: #16a34a;
+  }
+  
+  /* Google Login Button */
+  .social-login {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+
+  .google-btn {
+    font-family: Montserrat;
+  }
+  
+  
+  
+  .google-btn img {
+    margin-right: 10px;
+  }
+  
+  .google-btn:hover {
+    background-color: #f1f1f1;
+  }
+ 
+  
+  /* Already have an account */
+  .login-text {
+    font-family: Montserrat;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .login-text .link {
+    color: #22c55e;
+    font-weight: bold;
+  }
+  
+  .login-text .link:hover {
+    text-decoration: underline;
+  }
+  

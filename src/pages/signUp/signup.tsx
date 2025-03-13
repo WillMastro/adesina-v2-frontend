@@ -4,21 +4,18 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { isSending, notifyError } from "../../utils/useutils";
 import { makeRequest } from "../../hook/useApi";
 import { signupApi } from "../../data/apis";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./signup.css";
 
 const SignUp = () => {
-  const Navigate = useNavigate();
   const [user, setUser] = useState({
     fullname:"",
     email:"",
   })
 
-  const handleChange = (e:any) => {
-    const {name, value} = e.target;
-    setUser({...user, [name]:value})
-  }
 
-  const signUpHndler = async(data:any)=> {
+
+  const signUpHndler = async(data: { fullname: string; email: string })=> {
     const cb = () => {isSending(false)};
     isSending(true, "Please Wait...");
      const res = await makeRequest("POST", signupApi, data, cb);
@@ -33,7 +30,7 @@ const SignUp = () => {
     onError: () => notifyError('signup Failed')
   });
 
-  const handleSuccess = async (response: any) => {
+  const handleSuccess = async (response: { access_token: string }) => {
     const res = await makeRequest('GET', 'https://www.googleapis.com/oauth2/v3/userinfo', null, null, response?.access_token);
     if(res){
       const data = {email:res.email, fullname:res.name}
@@ -56,42 +53,81 @@ const SignUp = () => {
 
 
 
+
+
+  function setEmail(value: string): void {
+    setUser((prevUser) => ({ ...prevUser, email: value }));
+  }
+
     return ( <>
      <section  className="centered-algn">
         <NavBar active="signUp" />
-        <div className="my-col-4 rad-20  my-bottom-50 bd-code-2 down-10 xs-down-15vh off-4 xs-container">
-            <div className="my-container xs-10 xs-off-1 xs-down-10 down-5">
-              <div><span className="px13 besley-bold xs-px15 alice">Sign Up</span>
-              <div className="my-mother xs-down-1"><span className="px10 faded-sol besley-regular xs-px13">Unlimited contents for you</span></div>
-               
-               <div className="my-mother down-2 xs-down-10">
-                <span className="faded-sol gap-elements centered-align fnt-system bold px9 xs-px13"><i className="fas fa-user px9 xs-px13"></i>Fullname</span>
-                <input type="text" name="fullname" value={user?.fullname} onChange={handleChange}  className="input down-1 xs-down-2 px10 xs-px12  rad-10 alice fnt-system bold bd-code-2" />
-               </div>
-               <div className="my-mother down-2 xs-down-5">
-                <span className="faded-sol gap-elements centered-align fnt-system bold px9 xs-px13"><i className="fas fa-envelope px9 xs-px13"></i>Email</span>
-                <input type="text" name="email" value={user?.email} onChange={handleChange}  className="input down-1 xs-down-2 px10 xs-px12  rad-10 alice besley-regular bd-code-2" />
-               </div>
-               {/* <div className="my-mother down-2">
-                <span className="faded-sol gap-elements centered-align besley-regular px10"><i className="fas fa-key px8"></i>Password</span>
-                <input type="password" name="password" value={user?.password}  onChange={handleChange}  className="input down-1 px10 alice besley-regular bd-code-2" />
-               </div> */}
+        <div className="signup-container">
+      <div className="signup-box">
+        <h2 className="signup-title">Create account</h2>
+        <p className="signup-subtext">
+          Get started by creating an account with us.
+        </p>
 
-               <div className="centered-align gap-elements my-mother xs-down-5 alice down-3">
-                <label htmlFor="yr" className="c-pointer">Sign up means you have read and agree to <u>terms of use</u></label>
-               </div>
-                <div className="my-mother down-2 xs-down-5">
-                  <button className="input flex px9 besley-bold bg-faded-2 centered xs-px13 rad-10">Sign Up</button>
-                </div>
-                <div className="my-mother down-3 xs-down-10">
-                  <span className="alice bold c-pointer pd-10" onClick={()=> {signUp()}}>Sign Up With Google <i className="fab fa-google"></i></span>
-                </div>
-                <div className="my-mother down-3 xs-down-5 xs-down-10">
-                  <span className="alice c-pointer pd-10" onClick={()=> {Navigate('/login')}}>Login Instead </span>
-                </div>
-              </div>
-            </div>
-        </div> 
+        {/* Fullname Input */}
+        <div className="input-group">
+          <label>Fullname</label>
+          <input
+            type="text"
+            value={user.fullname}
+            onChange={(e) =>
+              setUser((prevUser) => ({ ...prevUser, fullname: e.target.value }))
+            }
+            placeholder="Enter your fullname"
+          />
+        </div>
+
+        {/* Email Input */}
+        <div className="input-group">
+          <label>Email address</label>
+          <input
+            type="email"
+            value={user.email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="abc@email.com"
+            required
+          />
+        </div>
+
+        {/* Terms & Conditions */}
+        <div className="terms">
+          <p>
+            By signing up, you agree to Adesina&apos;s{" "}
+            <a href="#" className="link">Terms of Service</a> and{" "}
+            <a href="#" className="link">Privacy Policy</a>.
+          </p>
+        </div>
+
+        {/* Submit Button */}
+        <button onClick={signupManual} className="signup-btn">
+          Create account
+        </button>
+
+        {/* Social Login */}
+        <div className="social-login">
+          <button onClick={signUp} className="google-btn">
+            <img
+              src="https://img.icons8.com/color/20/000000/google-logo.png"
+              alt="Google"
+            />
+            Continue with Google
+          </button>
+        </div>
+
+        {/* Already have an account */}
+        <p className="login-text">
+          Already have an account?{" "}
+          <Link to="/login" className="login-link">
+            Login
+            </Link>
+        </p>
+      </div>
+    </div>
      </section>
     
     </> );

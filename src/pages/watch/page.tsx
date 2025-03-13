@@ -4,6 +4,7 @@ import NavBar from '../../components/navBar/navbar';
 import Triller from './triller';
 import VideoList from './videoList';
 
+
 const Watch = () => {
 
     const logout = () => {
