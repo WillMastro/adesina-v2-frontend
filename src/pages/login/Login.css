@@ -65,6 +65,10 @@
     border-color: #fce8a9;
     outline: none;
   }
+
+  .email-input {
+    color: white;
+  }
   
   /* Password Field */
   .password-container {
@@ -74,6 +78,7 @@
   .password-container input {
     width: 100%;
     padding-right: 35px;
+    background: #000;
   }
   
   .toggle-password {

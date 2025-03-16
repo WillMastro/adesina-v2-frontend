@@ -9,14 +9,33 @@ import "./signup.css";
 
 const SignUp = () => {
   const Navigate = useNavigate();
-  const [user, setUser] = useState({
-    fullname:"",
-    email:"",
-  })
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordValidations, setPasswordValidations] = useState({
+    has8Chars: false,
+    hasUpperCase: false,
+    hasLowerCase: false,
+  });
+
+   // try push
+
+   const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    // Validate password
+    setPasswordValidations({
+      has8Chars: value.length >= 8,
+      hasUpperCase: /[A-Z]/.test(value),
+      hasLowerCase: /[a-z]/.test(value),
+    });
+  };
+  
 
 
 
-  const signUpHndler = async(data: { fullname: string; email: string })=> {
+  const signUpHndler = async(data: { email: string; password: string })=> {
     const cb = () => {isSending(false)};
     isSending(true, "Please Wait...");
      const res = await makeRequest("POST", signupApi, data, cb);
@@ -34,20 +53,17 @@ const SignUp = () => {
   const handleSuccess = async (response: { access_token: string }) => {
     const res = await makeRequest('GET', 'https://www.googleapis.com/oauth2/v3/userinfo', null, null, response?.access_token);
     if(res){
-      const data = {email:res.email, fullname:res.name}
+      const data = {email:res.email, password:res.password}
        await signUpHndler(data);
    }
   };
 
   const signupManual = async() => {
-    if(user?.fullname == ""){
-      notifyError('enter your fullname');
-      return
-    }
     if(user?.email == ""){
       notifyError('enter your email');
       return
     }
+    
     await signUpHndler(user);
   }
 
@@ -56,7 +72,7 @@ const SignUp = () => {
 
 
 
-  function setEmail(value: string): void {
+  const setEmail = (value: string): void => {
     setUser((prevUser) => ({ ...prevUser, email: value }));
   }
 
@@ -70,30 +86,52 @@ const SignUp = () => {
           Get started by creating an account with us.
         </p>
 
-        {/* Fullname Input */}
-        <div className="input-group">
-          <label>Fullname</label>
-          <input
-            type="text"
-            value={user.fullname}
-            onChange={(e) =>
-              setUser((prevUser) => ({ ...prevUser, fullname: e.target.value }))
-            }
-            placeholder="Enter your fullname"
-          />
-        </div>
-
-        {/* Email Input */}
-        <div className="input-group">
+          {/* Email Input */}
+          <div className="input-group">
           <label>Email address</label>
-          <input
+          <input className="email-input"
             type="email"
             value={user.email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="abc@email.com"
             required
           />
-        </div>
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <div className="password-container">
+  <input
+    type={showPassword ? "text" : "password"}
+    value={password}
+    onChange={handlePasswordChange}
+    placeholder="Enter your password"
+    required
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="toggle-password"
+  >
+    {showPassword ? "🙈" : "👁️"}
+  </button>
+  
+</div>
+
+          </div>
+
+          {/* Password validation checks */}
+<div className="password-validations">
+  <p className={passwordValidations.has8Chars ? "valid" : "invalid"}>
+    8 characters <span>✔️</span>
+  </p>
+  <p className={passwordValidations.hasUpperCase ? "valid" : "invalid"}>
+    Upper case <span>✔️</span>
+  </p>
+  <p className={passwordValidations.hasLowerCase ? "valid" : "invalid"}>
+    Lower case <span>✔️</span>
+  </p>
+</div>
+
 
         {/* Terms & Conditions */}
         <div className="terms">
@@ -129,9 +167,9 @@ const SignUp = () => {
         </p>
       </div>
     </div>
-     </section>
-    
-    </> );
-}
+      </section>
+    </>
+  );
+};
  
 export default SignUp;

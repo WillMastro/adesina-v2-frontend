@@ -72,7 +72,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
             <label>Email address</label>
-            <input
+            <input className="email-input"
               type="email"
               placeholder="abc@email.com"
               value={email}

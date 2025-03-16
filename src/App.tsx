@@ -16,6 +16,7 @@ import Cities from "./pages/cities/city";
 import ContactUs from "./pages/contactUs/contact_us";
 import SignUp from "./pages/signUp/signup";
 import Login from "./pages/login/login";
+import VerifyEmail from "./pages/verifyemail/verifyEmail";
 
 
 
@@ -31,9 +32,10 @@ const App = () => {
            <Route path="/watch" element={ token? <Watch/> : <Navigate to="/login" />} />
            <Route path="/Cities" element={<Cities/>} />
            <Route path="/contact" element={<ContactUs/>} />
-           <Route path="/signup" element={ <SignUp/> } />
-           <Route path="/login" element={<Login/> }/>
+           <Route path="/signup" element={!token? <SignUp/> : <Navigate to="/verify-email"/>}/>
+           <Route path="/login" element={!token?<Login/> : <Navigate to="/watch"/>}/>
            <Route path="*" element={<NotFound/>} />
+           <Route path="/verify-email" element={!token? <VerifyEmail/> : <Navigate to="/login"/>} />
         </Route>
       </>
     )
