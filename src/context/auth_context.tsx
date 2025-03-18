@@ -4,16 +4,16 @@
 
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { makeRequest } from "../hook/useApi";
-import { allBlogsApi, allPosts } from "../data/apis";
+import { allVideosApi, allvlogsApi } from "../data/apis";
 
 export const UserContext = createContext<any>(undefined);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-  const token = localStorage.getItem('willmaestroit_blog_manager_token')
-  const [allBlogs, setAllBlogs] = useState<any>(null);
-  const [filteredBlogs, setFilteredBlogs] = useState<any>(null);
-  const [filteredPosts, setFilteredPosts] = useState<any>(null);
+  const token = localStorage.getItem('adesina_admin_token')
+  const [allvlogs, setAllvlogs] = useState<any>(null);
   const [post, setPosts] = useState<any>(null);
+  const [filteredvlogs, setFilteredvlogs] = useState<any>(null);
+  const [filteredPosts, setFilteredPosts] = useState<any>(null);
   const [Params, setParams] = useState({
     page: 1,
     limit: 50,
@@ -29,8 +29,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
 
   const updateCustomerData = (data: any) => {
-    setAllBlogs(data.blogs || []);
-    setFilteredBlogs(data.blogs || []);
+    setAllvlogs(data.vlogs || []);
+    setFilteredvlogs(data.vlogs || []);
     setParams({
       ...Params,
       totalPages: data.totalPages || 0,
@@ -39,8 +39,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updatePostData = (data: any) => {
-    setPosts(data.blogs || []);
-    setFilteredPosts(data.blogs || []);
+    setPosts(data.vlogs || []);
+    setFilteredPosts(data.vlogs || []);
     setPostParams({
       ...Params,
       totalPages: data.totalPages || 0,
@@ -48,68 +48,44 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     })
   };
 
-  const getAllBlogs = async (params: any) => {
-    setAllBlogs(null);
-    const localData = localStorage.getItem("blog_response");
-    if (localData) {
-      const res = JSON.parse(localData);
-      updateCustomerData(res?.data);
-    } else {
-      const res = await makeRequest("POST", allBlogsApi, params, null, token);
+  const getAllvlogs = async (params: any) => {
+    setAllvlogs(null);
+      const res = await makeRequest("POST", allvlogsApi, params, null, token);
       if (res) {
         updateCustomerData(res?.data);
-        localStorage.setItem('blog_response', JSON.stringify(res))
       }
-    }
   };
 
-  const getAllPosts = async (params: any) => {
+  const getAllVideos = async (params: any) => {
     setPosts(null);
-    const res = await makeRequest("POST", allPosts, params, null, null);
+    const res = await makeRequest("POST", allVideosApi, params, null, null);
     if (res) {
       updatePostData(res?.data);
-      // localStorage.setItem('blog_response', JSON.stringify(res))
     }
   };
 
 
-  useEffect(() => {
-    getAllPosts(postParams)
-  }, [])
-
-
-  const ibadan = [
-    { img: "/img4.jpg" },
-    { img: "/img5.jpg" },
-    { img: "/city.svg" },
-  ]
-
-  const abuja = [
-    { img: "/img6.jpg" },
-    { img: "/abuja.svg" },
-    { img: "/img4.jpg" },
-    { img: "/img5.jpg" },
-  ]
+  // useEffect(() => {
+  //   getAllPosts(postParams)
+  // }, [])
 
 
 
   return (
     <UserContext.Provider
       value={{
-        getAllBlogs,
-        allBlogs,
-        setAllBlogs,
-        filteredBlogs,
-        setFilteredBlogs,
+        getAllvlogs,
+        allvlogs,
+        setAllvlogs,
+        filteredvlogs,
+        setFilteredvlogs,
         Params,
         setParams,
         token,
         filteredPosts, setFilteredPosts,
         post, setPosts,
-        getAllPosts,
+        getAllVideos,
         postParams, setPostParams,
-        ibadan,
-        abuja
       }}
     >
       {children}

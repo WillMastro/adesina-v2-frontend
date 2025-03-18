@@ -37,12 +37,11 @@
 
 nav {
     height:10vh;
+    position: absolute;
     /* background-color: #fff; */
     display: flex !important;
-    position: fixed;
     width: 100vw;
     z-index: 723781191201927237823988472378945908848;
-    background-color:rgba(0, 0, 0, 0.096);
     justify-content: space-between !important;
     align-items: center;
 

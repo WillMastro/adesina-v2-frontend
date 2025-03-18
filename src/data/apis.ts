@@ -1,24 +1,33 @@
 // const baseUrl = "http://localhost:4000/api/v1";
-const baseUrl = " https://will-revamp-be.onrender.com/api/v1";
-const loginApi = `${baseUrl}/aaj/login`;
-const signupApi = `${baseUrl}/aaj/signup`;
-const searchpostsApi = `${baseUrl}/userAuth/searchposts`;
-const postApi = `${baseUrl}/userAuth/posts`;
-const addBlog = `${baseUrl}/blogs/add`;
-const allBlogsApi = `${baseUrl}/blogs/all`;
-const deleteBlogApi = `${baseUrl}/blogs/delete`;
-const searchApi = `${baseUrl}/blogs/search`;
-const updateApi = `${baseUrl}/blogs/update`;
+const baseUrl = "https://adesina-revemp-be.onrender.com/api/v1";
+const adminloginApi = `${baseUrl}/admin/login`;
+const userloginApi = `${baseUrl}/user/login`;
+const usersignupApi = `${baseUrl}/user/signUp`;
+const verifyOTPApi = `${baseUrl}/user/verify_otp`;
+const resendOTPApi = `${baseUrl}/user/resendOTP`;
+const roundtableApi = `${baseUrl}/user/join_round_table`;
+
+
+const allVideosApi = `${baseUrl}/vlogs/videos`;
+const addvlogApi = `${baseUrl}/vlogs/add`;
+const allvlogsApi = `${baseUrl}/vlogs/all`;
+const deletevlogApi = `${baseUrl}/vlogs/delete`;
+const searchApi = `${baseUrl}/vlogs/search`;
+const updateApi = `${baseUrl}/vlogs/update`;
 
 
 export {
-  loginApi,
-  addBlog,
-  allBlogsApi,
-  deleteBlogApi,
+  adminloginApi,
+  userloginApi,
+  usersignupApi,
+  verifyOTPApi,
+  resendOTPApi,
+  roundtableApi,
+// all videos Api;
+  addvlogApi,
+  allvlogsApi,
+  deletevlogApi,
   searchApi,
   updateApi,
-  signupApi,
-  postApi,
-  searchpostsApi
+  allVideosApi,
 };
